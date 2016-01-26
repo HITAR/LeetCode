@@ -1,3 +1,9 @@
+typedef struct ListNode
+{
+    int val;
+    struct ListNode *next;
+} ListNode;
+
 void deleteNode(ListNode* node)
 {
     ListNode* p = node->next;
