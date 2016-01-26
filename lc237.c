@@ -2,7 +2,7 @@ typedef struct ListNode
 {
     int val;
     struct ListNode *next;
-} ListNode;
+}ListNode;
 
 void deleteNode(ListNode* node)
 {
