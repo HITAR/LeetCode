@@ -1,3 +1,7 @@
+/**
+*This problem is equal to transfer 26-base to 10-base
+*/
+
 class Solution {
 public:
    int titleToNumber(string s)
