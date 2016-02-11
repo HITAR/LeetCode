@@ -1,28 +1,39 @@
 #include <iostream>
-#include<cstdio>
-#include<cstdlib>
-#include<cstring>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
+/*
+*Hash solution
+*
+*/
+
 int majorityElement(vector<int>& nums)
 {
+    map<int, int> counts; 
     int n = nums.size();
-    sort(nums.begin(),nums.end());
-    vector<int>::iterator iter = nums.end()-1;
-    int cnt[*iter];
-    memset(cnt,0,sizeof(int)*(*iter));
-    for(iter = nums.begin(); iter!=nums.end(); iter++)
-    {
-        cnt[*iter]++;
-    }
-    for(iter = nums.begin(); iter!=nums.end(); iter++)
-    {
-        if(cnt[*iter]>=n/2)
-            return *iter;
-    }
+    for (int i = 0; i < n; i++)
+        if (++counts[nums[i]] > n / 2)
+             return nums[i];
+}
 
+
+/**
+* Sort solutions. nth_element() is a nice function.
+*/
+
+int majorityElement_sort1(vector<int>& nums)
+{
+     sort(nums.begin(),nums.end());
+     int len = nums.size();
+     return nums[len/2];
+}
+int majorityElement_sort2(vector<int>& nums) {
+        nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
+        return nums[nums.size() / 2];
 }
 
 
