@@ -4,11 +4,12 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
+#include <ctime>
+#include <map>
 using namespace std;
 
 /*
 *Hash solution
-*
 */
 
 int majorityElement(vector<int>& nums)
@@ -35,6 +36,31 @@ int majorityElement_sort2(vector<int>& nums) {
         nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
         return nums[nums.size() / 2];
 }
+
+/*
+*Randomization.This is a really nice idea and works pretty well. 
+(16ms running time on the OJ, almost fastest among the C++ solutions).
+*The code is as follows, randomly pick an element and see if it is the majority one.
+*/
+
+
+int majorityElement_random(vector<int>& nums)
+{
+	srand(unsigned(time(NULL)));
+	int n = nums.size();
+	while(true)
+    {
+        int idx = rand() % n;
+        int candidate = nums[idx];
+        int counts = 0;
+        for(int i=0;i<n;i++)
+            if(nums[i] = candidate)
+                counts++;
+        if(counts>n/2)
+            return candidate;
+    }
+}
+
 
 
 int main()
