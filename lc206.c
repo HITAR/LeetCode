@@ -3,19 +3,41 @@
  * struct ListNode {
  *     int val;
  *     struct ListNode *next;
- * };
+ * };  //no head node.
  */
-struct ListNode* reverseList(struct ListNode* head) {
-    struct ListNode *p,*q;
-    p = head->next;
-    q = p->next;
+
+
+
+ //solution:iteration. 
+struct ListNode* reverseList1(struct ListNode* head) {
+    if(head==NULL) return head;
+    
+    struct ListNode *p = head->next;
     head->next = NULL;
-    while(q!=NULL)
+    while(p!=NULL)
     {
-    	q->next = p;
-    	p = q;
-    	q = q->next;
+    	struct ListNode *tmp = p->next;
+    	p->next = head;
+    	head = p;
+    	p = tmp;
     }
-    head->next = p;
     return head;
 }
+
+ //solution:recursive
+
+struct ListNode* reverseList2(struct ListNode* head)
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
