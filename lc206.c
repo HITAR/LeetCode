@@ -11,7 +11,7 @@
  //solution:iteration. 
 struct ListNode* reverseList1(struct ListNode* head) {
     if(head==NULL) return head;
-    
+
     struct ListNode *p = head->next;
     head->next = NULL;
     while(p!=NULL)
@@ -28,7 +28,14 @@ struct ListNode* reverseList1(struct ListNode* head) {
 
 struct ListNode* reverseList2(struct ListNode* head)
 {
+	if(head==NULL || head->next ==NULL)
+		return head;
+	struct ListNode *p = head->next;
+	head->next = NULL;
+	struct ListNode *newhead = reverseList2(p);
+	p->next = head;
 
+	return newhead;
 }
 
 
