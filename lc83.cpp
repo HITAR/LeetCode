@@ -3,7 +3,6 @@
 * delete all duplicates such that each element appear only once.
 */
 
-
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -11,28 +10,32 @@ using namespace std;
 
 
 //Definition for singly-linked list.
-struct ListNode
+typedef struct ListNode
 {
     int val;
     struct ListNode *next;
-};
+}ListNode;
 
-struct ListNode* deleteDuplicates(struct ListNode* head)
+ListNode* deleteDuplicates(ListNode* head)
 {
-    struct ListNode *p = head;
-    struct ListNode *q = p->next;
-    while(p!=NULL)
+    ListNode* cur = head;
+    while(cur)
     {
-        while(q->val==p->val&&q!=NULL)
+        while(cur->next && cur->val == cur->next->val)
         {
-            p->next = q->next;
-            delete(q);
-            q = p->next;
+            cur->next = cur->next->next;
         }
-        p=q;
-        q=q->next;
+        cur = cur->next;
     }
     return head;
+}
+
+// A very talent solution,, cannot understand yet.
+ListNode* deleteDuplicates2(ListNode* head) {
+        if(head == NULL || head->next == NULL)
+            return head;
+        head->next = deleteDuplicates(head->next);
+        return head->val == head->next->val ? head->next : head;
 }
 
 
@@ -41,12 +44,13 @@ int main()
     struct ListNode *head;
     head = (struct ListNode*)malloc(sizeof(ListNode));
     head->val =1;
-     struct ListNode *p1 = head->next;
-     p1 = (struct ListNode*)malloc(sizeof(ListNode));
-     p1->val =1;
-     p1->next = NULL;
-     struct ListNode* ans = deleteDuplicates(head);
-     for(struct ListNode *q = ans;q!=NULL;q = q->next)
+    head->next = NULL;
+    struct ListNode *p1 = (struct ListNode*)malloc(sizeof(ListNode));
+    head->next = p1;
+    p1->val =2;
+    p1->next = NULL;
+    struct ListNode* ans = deleteDuplicates2(head);
+    for(struct ListNode *q = ans; q!=NULL; q = q->next)
         cout<<q->val;
     return 0;
 }
