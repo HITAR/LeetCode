@@ -53,4 +53,3 @@ int main()
     for(struct ListNode *q = ans; q!=NULL; q = q->next)
         cout<<q->val;
     return 0;
-}
