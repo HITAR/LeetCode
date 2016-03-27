@@ -21,19 +21,27 @@ typedef struct ListNode
 }ListNode;
 
 
-LIstNode* oddEvenList(ListNode* head)
+ListNode* oddEvenList(ListNode* head)
 {
-	ListNode dummy;
-	dummy.val = INT_MIN;
-	LIstNode* tail = &dummy;
+	ListNode dummyOdd,dummyEven;
+	dummyOdd.val = INT_MIN;
+	dummyEven.val = INT_MIN;
+	ListNode* tail_o = &dummyOdd;
+	ListNode* tail_e = &dummyEven;
 
-	LIstNode* tail2;
+	ListNode *hn = head->next;
 	while(head)
 	{
-		tail->next = head;
-		tail2 = tail->next; 
-		head = head->next->next;
+		tail_o->next = head;
+		tail_e->next = hn;
 
-		tail = tail->next;
+		head = head->next->next;
+		hn = hn->next->next;
+
+		tail_o = tail_o->next;
+		tail_e = tail_e->next;
 	}
+	tail_o->next = dummyEven.next;
+	tail_e->next = NULL;
+	return dummyOdd.next;
 }
