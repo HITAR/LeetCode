@@ -16,6 +16,32 @@ typedef struct ListNode
     struct ListNode *next;
 }ListNode;
 
+ListNode * deleteDuplicates_myversion(ListNode *head)
+{
+    if(!head || !head->next) //make sure the list is not empty so that q is legal.
+        return head;
+    ListNode *p = head;
+    ListNode *q = head->next;
+    while(p)
+    {
+        while(q && p->val == q->val)
+        {
+            p->next = q->next;
+            q = p->next;
+        }
+        if(q == NULL)
+            p = q;
+        else
+        {
+            p = q;
+            q = q->next;
+        }
+    }
+    return head;
+}
+
+
+
 ListNode* deleteDuplicates(ListNode* head)
 {
     ListNode* cur = head;
