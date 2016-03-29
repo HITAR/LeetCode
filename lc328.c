@@ -20,28 +20,23 @@ typedef struct ListNode
              struct ListNode *next;
 }ListNode;
 
-
 ListNode* oddEvenList(ListNode* head)
 {
-	ListNode dummyOdd,dummyEven;
-	dummyOdd.val = INT_MIN;
-	dummyEven.val = INT_MIN;
-	ListNode* tail_o = &dummyOdd;
-	ListNode* tail_e = &dummyEven;
-
-	ListNode *hn = head->next;
-	while(head)
-	{
-		tail_o->next = head;
-		tail_e->next = hn;
-
-		head = head->next->next;
-		hn = hn->next->next;
-
-		tail_o = tail_o->next;
-		tail_e = tail_e->next;
-	}
-	tail_o->next = dummyEven.next;
-	tail_e->next = NULL;
-	return dummyOdd.next;
+    ListNode *tail[2];
+    ListNode dummyOdd,dummyEven;
+    dummyOdd.val = INT_MIN;
+    dummyEven.val = INT_MIN;
+    int i;
+    tail[0] = &dummyOdd;
+    tail[1] = &dummyEven;
+    for(i=0; head!=NULL; ++i)
+    {
+        //tail[i%2] = tail[i%2]->next = head; 
+        tail[i%2]->next = head; // split into two half
+        tail[i%2] = tail[i%2]->next;
+        head = head->next;
+    }
+    tail[0]->next = dummyEven.next; // reconnect the link
+    tail[1]->next = NULL;
+    return dummyOdd.next;
 }
